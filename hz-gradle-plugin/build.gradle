@@ -1,0 +1,54 @@
+plugins {
+    id 'java-library'
+    id 'java-gradle-plugin'
+    id 'org.jetbrains.kotlin.jvm'
+//    id 'com.gradle.plugin-publish'
+    id 'maven-publish'
+//    id 'signing'
+
+    id 'com.gradle.plugin-publish' version '1.1.0'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+//    sffsf
+    compileOnly("com.android.tools.build:gradle-api:${rootProject.ext.agpVersion}")
+    compileOnly("com.android.tools.build:gradle:${rootProject.ext.agpVersion}")
+
+    implementation 'commons-io:commons-io:2.4'
+    implementation 'commons-codec:commons-codec:1.10'
+    implementation 'org.ow2.asm:asm:9.1'
+    implementation 'org.ow2.asm:asm-commons:9.1'
+    implementation 'org.ow2.asm:asm-analysis:9.1'
+    implementation 'org.ow2.asm:asm-util:9.1'
+    implementation 'org.ow2.asm:asm-tree:9.1'
+    implementation 'com.google.code.gson:gson:2.10'
+}
+
+group = 'com.hzdata.analytics.android'
+version= rootProject.ext.pluginVersion
+
+//本地发布测试
+gradlePlugin {
+    website = 'https://github.com/zhoulesin/HZ-Data-Android-SDK'
+    vcsUrl = 'https://github.com/zhoulesin/HZ-Data-Android-SDK'
+    plugins {
+        ananlyticsPlugin {
+            id = 'com.hzdata.analytics.android'
+            implementationClass = "${id}.plugin.HZAnalyticsPlugin"
+            displayName = 'HZData Android SDK Plugin'
+            description = "The official Android SDK Gradle Plugin for HZ Analytics."
+            tags.set(['android', 'hzdata', 'analytics'])
+        }
+    }
+}
+
+//publishing {
+//    repositories {
+//        mavenLocal()
+//    }
+//}
